@@ -12,10 +12,13 @@ import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapte
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
@@ -33,16 +36,19 @@ class ClassicEditor extends ClassicEditorBase {}
 class DecoupledEditor extends DecoupledEditorBase {}
 
 // Plugins to include in the builds.
-ClassicEditor.builtinPlugins = [
+const plugins = [
 	Essentials,
 	UploadAdapter,
 	Autoformat,
 	Bold,
 	Italic,
+	Highlight,
 	BlockQuote,
 	CKFinder,
 	EasyImage,
 	Heading,
+	Font,
+	Alignment,
 	Image,
 	ImageCaption,
 	ImageStyle,
@@ -56,56 +62,49 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar
 ];
-DecoupledEditor.builtinPlugins = [
-	Essentials,
-	UploadAdapter,
-	Autoformat,
-	Bold,
-	Italic,
-	BlockQuote,
-	CKFinder,
-	EasyImage,
-	Heading,
-	Image,
-	ImageCaption,
-	ImageStyle,
-	ImageToolbar,
-	ImageUpload,
-	Link,
-	List,
-	MediaEmbed,
-	Paragraph,
-	PasteFromOffice,
-	Table,
-	TableToolbar
-];
+ClassicEditor.builtinPlugins = plugins;
+DecoupledEditor.builtinPlugins = plugins;
 
 // Editor configuration.
-ClassicEditor.defaultConfig = {
+const config = {
 	toolbar: {
 		items: [
 			'heading',
 			'|',
+			'fontSize',
+			'fontFamily',
+			'|',
+			'fontColor',
+			'fontBackgroundColor',
 			'bold',
 			'italic',
-			'link',
-			'bulletedList',
+			'highlight',
+			'|',
+			'alignment',
 			'numberedList',
+			'bulletedList',
+			'|',
+			'link',
 			'imageUpload',
 			'blockQuote',
 			'insertTable',
-			'mediaEmbed',
+			'|',
 			'undo',
 			'redo'
 		]
 	},
 	image: {
 		toolbar: [
+			'imageStyle:alignLeft',
 			'imageStyle:full',
-			'imageStyle:side',
+			'imageStyle:alignRight',
 			'|',
 			'imageTextAlternative'
-		]
+		],
+		styles: [ 'alignLeft', 'full', 'alignRight' ]
+	},
+	link: {
+		addTargetToExternalLinks: true
 	},
 	table: {
 		contentToolbar: [
@@ -117,41 +116,7 @@ ClassicEditor.defaultConfig = {
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
-DecoupledEditor.defaultConfig = {
-	toolbar: {
-		items: [
-			'heading',
-			'|',
-			'bold',
-			'italic',
-			'link',
-			'bulletedList',
-			'numberedList',
-			'imageUpload',
-			'blockQuote',
-			'insertTable',
-			'mediaEmbed',
-			'undo',
-			'redo'
-		]
-	},
-	image: {
-		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
-			'|',
-			'imageTextAlternative'
-		]
-	},
-	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
-	},
-	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
-};
+ClassicEditor.defaultConfig = config;
+DecoupledEditor.defaultConfig = config;
 
 export default { ClassicEditor, DecoupledEditor };

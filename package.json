@@ -89,6 +89,9 @@
     }
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-alignment": "^11.2.0",
+    "@ckeditor/ckeditor5-font": "^11.2.2",
+    "@ckeditor/ckeditor5-highlight": "^11.0.5",
     "css-loader": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0"
   }
