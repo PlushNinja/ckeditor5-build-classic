@@ -106,7 +106,43 @@ const palette = [
 ];
 
 // Editor configuration.
-const config = {
+ClassicEditor.defaultConfig = {
+	toolbar: {
+		items: [
+			'heading',
+			'|',
+			'fontSize',
+			'fontFamily',
+			'|',
+			'bold',
+			'italic',
+			'|',
+			'alignment',
+			'numberedList',
+			'bulletedList',
+			'|',
+			'link',
+			'blockQuote',
+			'insertTable',
+			'|',
+			'undo',
+			'redo'
+		]
+	},
+	link: {
+		addTargetToExternalLinks: true
+	},
+	table: {
+		contentToolbar: [
+			'tableColumn',
+			'tableRow',
+			'mergeTableCells'
+		]
+	},
+	// This value must be kept in sync with the language defined in webpack.config.js.
+	language: 'en'
+};
+DecoupledEditor.defaultConfig = {
 	toolbar: {
 		items: [
 			'heading',
@@ -164,7 +200,5 @@ const config = {
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
-ClassicEditor.defaultConfig = config;
-DecoupledEditor.defaultConfig = config;
 
 export default { ClassicEditor, DecoupledEditor };
